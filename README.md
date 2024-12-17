@@ -38,8 +38,11 @@ This project is an online learning platform designed to facilitate the sharing o
 ## Usage
 
 -**Register**: New users can register as either a teacher or a student.
+
 -**Login**: Users can log in to access their dashboard.
+
 -**Teacher Dashboard**: Teachers can add classes and lessons.
+
 -**Student Dashboard**: Students can view lessons based on their subjects.
 
 ## Contributing
