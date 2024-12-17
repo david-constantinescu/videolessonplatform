@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ session['name'] }}</h1>
+        <h2>Your Class: {{ session['class_name'] }}</h2>
+
+        <h2>Subjects</h2>
+        <ul>
+            {% for subject_info in student_subjects %}
+            <li>
+                <a href="{{ url_for('view_subject_lessons', subject=subject_info.subject, teacher=subject_info.teacher_name) }}">
+                    {{ subject_info.subject }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subject }} Lessons by {{ teacher }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ subject }} Lessons</h1>
+        <h2>Taught by {{ teacher }}</h2>
+
+        {% if lessons %}
+            <ul>
+                {% for lesson in lessons %}
+                <li>
+                    <a href="{{ lesson.video_url }}" target="_blank" class="btn">
+                        {{ lesson.lesson_name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No lessons have been added for this subject yet.</p>
+        {% endif %}
+
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

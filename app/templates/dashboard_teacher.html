@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .classes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .class-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            width: 250px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .class-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .add-class-form {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ session['name'] }}</h1>
+
+        <!-- Add Class Form -->
+        <form action="/add-class" method="POST" class="add-class-form">
+            <input type="text" name="class_name" placeholder="Class Name (e.g., 8E)" required>
+            <button type="submit" class="btn">Add Class</button>
+        </form>
+
+        <h2>Your Classes</h2>
+        <div class="classes-container">
+            {% for class in classes %}
+            <div class="class-card">
+                <h3>
+                    <a href="{{ url_for('view_class_lessons', class_name=class.name) }}">
+                        {{ class.name }}
+                    </a>
+                </h3>
+                
+                <!-- Quick Add Lesson Form -->
+                <form action="/add-lesson" method="POST">
+                    <input type="text" name="class_name" value="{{ class.name }}" hidden>
+                    <input type="text" name="lesson_name" placeholder="Lesson Name" required>
+                    <input type="url" name="video_url" placeholder="Video URL" required>
+                    <button type="submit" class="btn">Add Lesson</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>

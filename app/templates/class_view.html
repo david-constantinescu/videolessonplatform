@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Class View</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Class: {{ class_name }}</h1>
+        <h2>Lessons</h2>
+        <ul>
+            {% for lesson in class_data['lessons'] %}
+            <li>
+                <a href="{{ lesson['video_url'] }}" class="btn">{{ lesson['lesson_name'] }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>

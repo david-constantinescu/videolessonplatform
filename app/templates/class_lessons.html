@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lessons for {{ class_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Lessons for {{ class_name }}</h1>
+
+        <!-- Add Lesson Form -->
+        <form action="/add-lesson" method="POST">
+            <input type="text" name="class_name" value="{{ class_name }}" hidden>
+            <input type="text" name="lesson_name" placeholder="Lesson Name" required>
+            <input type="url" name="video_url" placeholder="Video URL" required>
+            <button type="submit" class="btn">Add Lesson</button>
+        </form>
+
+        {% if lessons %}
+            <h2>Existing Lessons</h2>
+            <ul>
+                {% for lesson in lessons %}
+                <li>
+                    <a href="{{ lesson.video_url }}" target="_blank">{{ lesson.lesson_name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No lessons added yet.</p>
+        {% endif %}
+
+        <a href="/dashboard" class="btn">Back to Dashboard</a>
+    </div>
+</body>
+</html>
